@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarsCraze - حيث الأناقة تلتقي بالأداء</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), 
+                        url('https://images.unsplash.com/photo-1580273916550-e323be2ae537?ixlib=rb-4.0.1&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .main-title {
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #fff;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 30px;
+            margin-bottom: 30px;
+            padding: 0;
+        }
+        
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 3px;
+        }
+        
+        .nav-links a:hover {
+            color: #c89b3c;
+            background: rgba(200, 155, 60, 0.1);
+        }
+        
+        .separator {
+            height: 1px;
+            background: linear-gradient(to right, transparent, #c89b3c, transparent);
+            width: 80%;
+            margin: 0 auto 40px auto;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .tagline {
+            font-size: 20px;
+            font-weight: 300;
+            color: #c89b3c;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+        }
+        
+        .main-heading {
+            margin-bottom: 30px;
+        }
+        
+        .subtitle {
+            font-size: 28px;
+            font-weight: 300;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+        
+        .title {
+            font-size: 80px;
+            font-weight: 700;
+            color: #fff;
+            transform: skewY(-3deg);
+            letter-spacing: 2px;
+            margin: 0;
+            line-height: 1.1;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+        }
+        
+        .description {
+            font-size: 18px;
+            color: #ccc;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+            font-weight: 300;
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        
+        .btn-primary, .btn-secondary {
+            padding: 14px 35px;
+            border: none;
+            border-radius: 3px;
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(to right, #c89b3c, #9b722d);
+            color: #000;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(to right, #b88a2d, #8a6728);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(200, 155, 60, 0.4);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: #fff;
+            border: 2px solid #c89b3c;
+        }
+        
+        .btn-secondary:hover {
+            background: #c89b3c;
+            color: #000;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(200, 155, 60, 0.4);
+        }
+        
+        .about {
+            padding: 80px 20px;
+            background-color: rgba(10, 10, 10, 0.8);
+            text-align: center;
+            margin-top: 60px;
+            border-top: 1px solid #333;
+        }
+        
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .about h2 {
+            font-size: 36px;
+            font-weight: 300;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #c89b3c;
+        }
+        
+        .about p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #cccccc;
+            margin-bottom: 40px;
+        }
+        
+        .social-section {
+            margin-top: 50px;
+        }
+        
+        .social-text {
+            font-size: 18px;
+            color: #cccccc;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background-color: transparent;
+            color: #ffffff;
+            border: 2px solid #666666;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background-color: #c89b3c;
+            border-color: #c89b3c;
+            color: #000000;
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(200, 155, 60, 0.4);
+        }
+        
+        .social-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        
+        .modal-content {
+            background-color: #0a0a0a;
+            margin: 10% auto;
+            padding: 30px;
+            border: 2px solid #c89b3c;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 10px;
+            position: relative;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .close {
+            color: #aaa;
+            float: left;
+            font-size: 32px;
+            font-weight: bold;
+            position: absolute;
+            left: 20px;
+            top: 10px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .close:hover {
+            color: #c89b3c;
+        }
+        
+        .modal h2 {
+            text-align: center;
+            margin: 20px 0 30px 0;
+            color: #c89b3c;
+            font-size: 28px;
+        }
+        
+        .modal input, .modal textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            color: #fff;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .modal input:focus, .modal textarea:focus {
+            outline: none;
+            border-color: #c89b3c;
+        }
+        
+        .modal button[type="submit"] {
+            background: linear-gradient(to right, #c89b3c, #9b72d2);
+            color: #000;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .modal button[type="submit"]:hover {
+            background: linear-gradient(to right, #b88a2d, #8a67b8);
+            transform: translateY(-3px);
+        }
+        
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 36px;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .title {
+                font-size: 50px;
+            }
+            
+            .subtitle {
+                font-size: 22px;
+            }
+            
+            .buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- الشريط العلوي -->
+    <header class="header">
+        <h1 class="main-title">CARSCRAZE</h1>
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Collection</a></li>
+                <li><a href="#">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- الخط الفاصل -->
+    <div class="separator"></div>
+
+    <!-- القسم الرئيسي -->
+    <section class="hero">
+        <div class="hero-content">
+            <!-- العبارات الثلاث -->
+            <h2 class="tagline">Precision, Prestige, Perfection.</h2>
+            
+            <!-- العبارتان الرئيسيتان -->
+            <div class="main-heading">
+                <h3 class="subtitle">Where Elegance Meets</h3>
+                <h3 class="title">Performance</h3>
+            </div>
+            
+            <!-- النص التوضيحي -->
+            <p class="description">
+                Discover a world of sophistication, power, and precision with our handpicked collection of luxury automobiles.
+            </p>
+
+            <!-- الأزرار -->
+            <div class="buttons">
+                <button class="btn-primary">Explore Collection</button>
+                <button class="btn-secondary">Contact Us</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم About Us -->
+    <section class="about">
+        <div class="about-content">
+            <h2>About CARSCRAZE</h2>
+            <p>We are passionate about luxury automobiles. Our curated collection features the finest vehicles from around the world, combining performance, elegance, and innovation.</p>
+            
+            <!-- وسائل التواصل الاجتماعي -->
+            <div class="social-section">
+                <p class="social-text">Contact us with</p>
+                <div class="social-icons">
+                    <a href="https://wa.me/966123456789" class="social-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="https://facebook.com/carscraze" class="social-icon">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://instagram.com/carscraze" class="social-icon">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://twitter.com/carscraze" class="social-icon">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 1200 1227" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"/>
+                        </svg>
+                    </a>
+                    <a href="https://tiktok.com/@carscraze" class="social-icon">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- نموذج الاتصال -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Contact Us</h2>
+            <form id="contactForm">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea placeholder="Your Message" rows="5" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // فتح وإغلاق نموذج الاتصال
+        const contactBtn = document.querySelector('.btn-secondary');
+        const modal = document.getElementById('contactModal');
+        const closeBtn = document.querySelector('.close');
+
+        contactBtn.addEventListener('click', function() {
+            modal.style.display = 'block';
+        });
+
+        closeBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+
+        // إغلاق النموذج عند النقر خارج المحتوى
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // إرسال النموذج
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // جمع بيانات النموذج
+            const formData = {
+                name: this.querySelector('input[type="text"]').value,
+                email: this.querySelector('input[type="email"]').value,
+                message: this.querySelector('textarea').value,
+                date: new Date().toLocaleString()
+            };
+            
+            // رسالة نجاح
+            alert(`شكراً ${formData.name}! سنتواصل معك خلال 24 ساعة.`);
+            
+            // إغلاق النموذج ومسح البيانات
+            modal.style.display = 'none';
+            this.reset();
+        });
+
+        // ربط زر Explore Collection
+        document.querySelector('.btn-primary').addEventListener('click', function() {
+            alert('Collection section will be added soon!');
+        });
+    </script>
+
+</body>
+</html>
