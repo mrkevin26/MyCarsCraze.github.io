@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audi Collection - CarsCraze</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: #000;
+            color: #fff;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: rgba(0, 0, 0, 0.95);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 3px solid #8a2be2; /* Purple color */
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .main-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #ff69b4; /* Pink color */
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+        
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 30px;
+            padding: 0;
+            margin-bottom: 15px;
+        }
+        
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s ease;
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+        
+        .nav-links a:hover {
+            color: #ff69b4; /* Pink color */
+            background: rgba(255, 105, 180, 0.1); /* Transparent pink color */
+        }
+        
+        .back-btn {
+            background: linear-gradient(to right, #8a2be2, #ff69b4); /* Purple-pink gradient */
+            color: #fff;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+        
+        .back-btn:hover {
+            background: linear-gradient(to right, #7a22cc, #e65ca3); /* Darker gradient */
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.3); /* Purple shadow */
+        }
+        
+        .brand-hero {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
+                        url('https://images.unsplash.com/photo-1542362567-b07e54358753?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .brand-logo {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 20px;
+            filter: brightness(0) invert(1);
+        }
+        
+        .brand-hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #ff69b4; /* Pink color */
+            text-transform: uppercase;
+        }
+        
+        .brand-hero p {
+            font-size: 18px;
+            color: #ccc;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .cars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            padding: 60px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .car-card {
+            background: #1a1a1a;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid #333;
+            position: relative;
+        }
+        
+        .car-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(138, 43, 226, 0.3); /* Purple shadow */
+            border-color: #ff69b4; /* Pink color */
+        }
+        
+        .car-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #8a2be2; /* Purple color */
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 15px;
+            font-weight: 600;
+            z-index: 2;
+        }
+        
+        .car-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-bottom: 3px solid #ff69b4; /* Pink color */
+        }
+        
+        .car-info {
+            padding: 30px;
+        }
+        
+        .car-title {
+            font-size: 28px;
+            color: #fff;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .car-specs {
+            color: #ccc;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #333;
+        }
+        
+        .spec-value {
+            color: #ff69b4; /* Pink color */
+            font-weight: 600;
+        }
+        
+        .car-price {
+            font-size: 32px;
+            color: #ff69b4; /* Pink color */
+            font-weight: bold;
+            margin: 25px 0;
+            text-align: center;
+            display: block;
+        }
+        
+        .car-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .feature {
+            background: rgba(138, 43, 226, 0.2); /* Transparent purple */
+            color: #ff69b4; /* Pink color */
+            padding: 8px 15px;
+            border-radius: 15px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .car-btn {
+            background: linear-gradient(to right, #8a2be2, #ff69b4); /* Purple-pink gradient */
+            color: #fff;
+            border: none;
+            padding: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .car-btn:hover {
+            background: linear-gradient(to right, #7a22cc, #e65ca3); /* Darker gradient */
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(138, 43, 226, 0.4);
+        }
+        
+        .brand-info {
+            padding: 60px 20px;
+            background: #111;
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .brand-info h2 {
+            font-size: 36px;
+            color: #ff69b4; /* Pink color */
+            margin-bottom: 30px;
+        }
+        
+        .brand-info p {
+            font-size: 18px;
+            color: #ccc;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        @media (max-width: 768px) {
+            .cars-grid {
+                grid-template-columns: 1fr;
+                padding: 30px 15px;
+                gap: 30px;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .car-image {
+                height: 220px;
+            }
+            
+            .car-info {
+                padding: 20px;
+            }
+            
+            .car-title {
+                font-size: 24px;
+            }
+            
+            .brand-hero {
+                padding: 60px 20px;
+            }
+            
+            .brand-hero h1 {
+                font-size: 36px;
+            }
+        }
+        
+        /* Scroll effects */
+        .car-card {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+        
+        .car-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1 class="main-title">AUDI COLLECTION</h1>
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="collection.html">All Brands</a></li>
+                <li><a href="#audi-models">Audi Models</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <button class="back-btn" onclick="window.location.href='collection.html'">
+            ← Back to Collection
+        </button>
+    </header>
+
+    <section class="brand-hero">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Audi_logo_Rings.svg/1280px-Audi_logo_Rings.svg.png" alt="Audi Logo" class="brand-logo">
+        <h1>Audi Quattro Series</h1>
+        <p>Discover the world of Audi luxury and performance. From sporty sedans to innovative SUVs, experience excellence on every journey.</p>
+    </section>
+
+    <div class="cars-grid" id="audi-models">
+        <div class="car-card">
+            <span class="car-badge">Performance</span>
+            <img src="https://images.unsplash.com/photo-1542362567-b07e54358753?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Audi R8 V10 Performance" class="car-image">
+            <div class="car-info">
+                <h3 class="car-title">Audi R8 V10 Performance</h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <span>Engine:</span>
+                        <span class="spec-value">5.2L V10 FSI</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Horsepower:</span>
+                        <span class="spec-value">602 hp</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>0-100 km/h:</span>
+                        <span class="spec-value">3.1 sec</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Top Speed:</span>
+                        <span class="spec-value">331 km/h</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Transmission:</span>
+                        <span class="spec-value">7-speed S tronic</span>
+                    </div>
+                </div>
+                <div class="car-features">
+                    <span class="feature">Carbon Fiber</span>
+                    <span class="feature">Quattro AWD</span>
+                    <span class="feature">Laser Lights</span>
+                    <span class="feature">Sport Exhaust</span>
+                </div>
+                <span class="car-price">$199,000</span>
+                <button class="car-btn">Request a Test Drive</button>
+            </div>
+        </div>
+
+        <div class="car-card">
+            <span class="car-badge">RS Series</span>
+            <img src="https://images.unsplash.com/photo-1627911681907-353f269a9b2c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Audi RS 7 Sportback" class="car-image">
+            <div class="car-info">
+                <h3 class="car-title">Audi RS 7 Sportback</h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <span>Engine:</span>
+                        <span class="spec-value">4.0L V8 Twin-Turbo</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Horsepower:</span>
+                        <span class="spec-value">591 hp</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>0-100 km/h:</span>
+                        <span class="spec-value">3.6 sec</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Top Speed:</span>
+                        <span class="spec-value">250 km/h</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Drivetrain:</span>
+                        <span class="spec-value">Quattro AWD</span>
+                    </div>
+                </div>
+                <div class="car-features">
+                    <span class="feature">Air Suspension</span>
+                    <span class="feature">Ceramic Brakes</span>
+                    <span class="feature">RS Sport Seats</span>
+                    <span class="feature">Matrix LED</span>
+                </div>
+                <span class="car-price">$120,000</span>
+                <button class="car-btn">Request a Test Drive</button>
+            </div>
+        </div>
+
+        <div class="car-card">
+            <span class="car-badge">Luxury SUV</span>
+            <img src="https://images.unsplash.com/photo-1596707328114-c11956551b9e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Audi Q8" class="car-image">
+            <div class="car-info">
+                <h3 class="car-title">Audi Q8 S-Line</h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <span>Engine:</span>
+                        <span class="spec-value">3.0L V6 Turbo</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Horsepower:</span>
+                        <span class="spec-value">335 hp</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>0-100 km/h:</span>
+                        <span class="spec-value">5.6 sec</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Capacity:</span>
+                        <span class="spec-value">5 passengers</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Drivetrain:</span>
+                        <span class="spec-value">Quattro AWD</span>
+                    </div>
+                </div>
+                <div class="car-features">
+                    <span class="feature">Panoramic Roof</span>
+                    <span class="feature">Virtual Cockpit</span>
+                    <span class="feature">Air Suspension</span>
+                    <span class="feature">MMI Touch Response</span>
+                </div>
+                <span class="car-price">$75,000</span>
+                <button class="car-btn">Request a Test Drive</button>
+            </div>
+        </div>
+
+        <div class="car-card">
+            <span class="car-badge">Electric</span>
+            <img src="https://images.unsplash.com/photo-1627911681907-353f269a9b2c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Audi e-tron GT" class="car-image">
+            <div class="car-info">
+                <h3 class="car-title">Audi e-tron GT quattro</h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <span>Engine:</span>
+                        <span class="spec-value">Dual Electric Motors</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Horsepower:</span>
+                        <span class="spec-value">469 hp</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>0-100 km/h:</span>
+                        <span class="spec-value">4.1 sec</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Range:</span>
+                        <span class="spec-value">488 km (WLTP)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Fast Charging:</span>
+                        <span class="spec-value">800V</span>
+                    </div>
+                </div>
+                <div class="car-features">
+                    <span class="feature">Electric Power</span>
+                    <span class="feature">Quattro AWD</span>
+                    <span class="feature">Sport Suspension</span>
+                    <span class="feature">Carbon Roof</span>
+                </div>
+                <span class="car-price">$102,000</span>
+                <button class="car-btn">Request a Test Drive</button>
+            </div>
+        </div>
+
+        <div class="car-card">
+            <span class="car-badge">Business Class</span>
+            <img src="https://images.unsplash.com/photo-1596707328114-c11956551b9e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Audi A6" class="car-image">
+            <div class="car-info">
+                <h3 class="car-title">Audi A6 Sedan</h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <span>Engine:</span>
+                        <span class="spec-value">2.0L TFSI</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Horsepower:</span>
+                        <span class="spec-value">245 hp</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>0-100 km/h:</span>
+                        <span class="spec-value">6.8 sec</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Transmission:</span>
+                        <span class="spec-value">S tronic</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Drivetrain:</span>
+                        <span class="spec-value">Quattro AWD</span>
+                    </div>
+                </div>
+                <div class="car-features">
+                    <span class="feature">Virtual Cockpit</span>
+                    <span class="feature">Ambient Lighting</span>
+                    <span class="feature">Parking Assist</span>
+                    <span class="feature">Leather Seats</span>
+                </div>
+                <span class="car-price">$55,000</span>
+                <button class="car-btn">Request a Test Drive</button>
+            </div>
+        </div>
+
+        <div class="car-card">
+            <span class="car-badge">Sport Coupe</span>
+            <img src="https://images.unsplash.com/photo-1542362567-b07e54358753?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Audi TT RS" class="car-image">
+            <div class="car-info">
+                <h3 class="car-title">Audi TT RS Coupe</h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <span>Engine:</span>
+                        <span class="spec-value">2.5L 5-Cylinder Turbo</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Horsepower:</span>
+                        <span class="spec-value">400 hp</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>0-100 km/h:</span>
+                        <span class="spec-value">3.7 sec</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Top Speed:</span>
+                        <span class="spec-value">250 km/h</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Transmission:</span>
+                        <span class="spec-value">7-speed S tronic</span>
+                    </div>
+                </div>
+                <div class="car-features">
+                    <span class="feature">Lightweight Design</span>
+                    <span class="feature">Quattro AWD</span>
+                    <span class="feature">Sport Suspension</span>
+                    <span class="feature">OLED Taillights</span>
+                </div>
+                <span class="car-price">$75,000</span>
+                <button class="car-btn">Request a Test Drive</button>
+            </div>
+        </div>
+    </div>
+
+    <section class="brand-info">
+        <h2>About the Audi Brand</h2>
+        <p>
+            Audi is a German luxury car manufacturer founded in 1909 and headquartered in Ingolstadt. 
+            Audi is known for its innovative design, high build quality, and the famous **Quattro** all-wheel-drive technology which provides superior performance and stability. 
+            Audi offers a wide range of vehicles that combine elegance, sportiness, and advanced technology, and is a part of the Volkswagen Group.
+        </p>
+    </section>
+
+    <script>
+        // Scroll effects for cards
+        const carCards = document.querySelectorAll('.car-card');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        carCards.forEach((card, index) => {
+            // Delay the appearance of each card sequentially
+            card.style.transitionDelay = `${index * 0.1}s`;
+            observer.observe(card);
+        });
+
+        // Test drive request button interaction
+        const buttons = document.querySelectorAll('.car-btn');
+        buttons.forEach(button => {
+            button.addEventListener('click', function() {
+                const carName = this.closest('.car-card').querySelector('.car-title').textContent;
+                alert(`Thank you for your interest in the ${carName}! Our team will contact you within 24 hours to arrange a test drive.`);
+            });
+        });
+    </script>
+</body>
+</html>

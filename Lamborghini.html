@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lamborghini Collection - CarsCraze</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #000;
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: rgba(0, 0, 0, 0.95);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 3px solid #ffcc00; /* Gold color */
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .main-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #ffcc00; /* Gold color */
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 30px;
+            padding: 0;
+            margin-bottom: 15px;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s ease;
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+
+        .nav-links a:hover {
+            color: #ffcc00; /* Gold color */
+            background: rgba(255, 204, 0, 0.1); /* Transparent gold */
+        }
+
+        .back-btn {
+            background: linear-gradient(to right, #2c2c2c, #ffcc00); /* Black-gold gradient */
+            color: #fff;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .back-btn:hover {
+            background: linear-gradient(to right, #000, #e6b800); /* Darker gradient */
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 204, 0, 0.3); /* Gold shadow */
+        }
+
+        .brand-hero {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)),
+                        url('https://images.unsplash.com/photo-1542362567-b07e54358753?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .brand-logo {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 20px;
+        }
+
+        .brand-hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #ffcc00; /* Gold color */
+            text-transform: uppercase;
+        }
+
+        .brand-hero p {
+            font-size: 18px;
+            color: #ccc;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .cars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            padding: 60px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .car-card {
+            background: #1a1a1a;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid #333;
+            position: relative;
+        }
+
+        .car-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 204, 0, 0.3); /* Gold shadow */
+            border-color: #ffcc00; /* Gold color */
+        }
+
+        .car-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #ffcc00; /* Gold color */
+            color: #000;
+            padding: 8px 15px;
+            border-radius: 15px;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .car-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-bottom: 3px solid #ffcc00; /* Gold color */
+        }
+
+        .car-info {
+            padding: 30px;
+        }
+
+        .car-title {
+            font-size: 28px;
+            color: #fff;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .car-specs {
+            color: #ccc;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #333;
+        }
+
+        .spec-value {
+            color: #ffcc00; /* Gold color */
+            font-weight: 600;
+        }
+
+        .car-price {
+            font-size: 32px;
+            color: #ffcc00; /* Gold color */
+            font-weight: bold;
+            margin: 25px 0;
+            text-align: center;
+            display: block;
+        }
+
+        .car-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .feature {
+            background: rgba(255, 204, 0, 0.2); /* Transparent gold */
+            color: #ffcc00; /* Gold color */
+            padding: 8px 15px;
+            border-radius: 15px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .car-btn {
+            background: linear-gradient(to right, #2c2c2c, #ffcc00); /* Black-gold gradient */
+            color: #fff;
+            border: none;
+            padding: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .car-btn:hover {
+            background: linear-gradient(to right, #000, #e6b800); /* Darker gradient */
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 204, 0, 0.4);
+        }
+
+        .brand-info {
+            padding: 60px 20px;
+            background: #111;
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .brand-info h2 {
+            font-size: 36px;
+            color: #ffcc00; /* Gold color */
+            margin-bottom: 30px;
+        }
+
+        .brand-info p {
+            font-size: 18px;
+            color: #ccc;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .cars-grid {
+                grid-template-columns: 1fr;
+                padding: 30px 15px;
+                gap: 30px;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .car-image {
+                height: 220px;
+            }
+
+            .car-info {
+                padding: 20px;
+            }
+
+            .car-title {
+                font-size: 24px;
+            }
+
+            .brand-hero {
+                padding: 60px 20px;
+            }
+
+            .brand-hero h1 {
+                font-size: 36px;
+            }
+        }
+
+        /* Scroll-in effects */
+        .car-card {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+
+        .car-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1 class="main-title">LAMBORGHINI COLLECTION</h1>
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="collection.html">All Brands</a></li>
+                <li><a href="#lambo-models">Lamborghini Models</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <button class="back-btn" onclick="window.location.href='collection.html'">
+            ← Back to Collection
+        </button>
+    </header>
+
+    <section class="brand-hero">
+        <img src="https://www.logo.wine/a/logo/Lamborghini/Lamborghini-Logo.wine.svg" alt="Lamborghini Logo" class="brand-logo">
+        <h1>Lamborghini Supercar Lineup</h1>
+        <p>Discover the world of Lamborghini's power and speed. Supercars with a bold design and unparalleled performance.</p>
+    </section>
+
+    <div class="cars-grid" id="lambo-models">
+        <div class="car-card">
+            <span class="car-badge">Ultimate V12</span>
+            <img src="https://images.unsplash.com/photo-1542362567-b07e54358753?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                 alt="Lamborghini Aventador SVJ" class="car-image">
+            <div class="car-info">
+                <h3 class="car-title">Lamborghini Aventador SVJ</h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <span>Engine:</span>
+                        <span class="spec-value">6.5L V12</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Horsepower:</span>
+                        <span class="spec-value">759 hp</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>0-60 mph:</span>
+                        <span class="spec-value">2.8 s</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Top Speed:</span>
+                        <span class="spec-value">217+ mph</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Transmission:</span>
+                        <span class="spec-value">7-speed ISR</span>
+                    </div>
+                </div>
+                <div class="car-features">
+                    <span class="feature">Carbon Fiber Monocoque</span>
+                    <span class="feature">ALA Aerodynamics</span>
+                    <span class="feature">4WD</span>
+                    <span class="feature">Extreme Performance</span>
+                </div>
+                <span class="car-price">$517,770</span>
+                <button class="car-btn">Request a Test Drive</button>
+            </div>
+        </div>
+
+        <div class="car-card">
+            <span class="car-badge">V10 Power</span>
+            <img src="https://images.unsplash.com/photo-1580274437636-1c384e567539?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                 alt="Lamborghini Huracán EVO" class="car-image">
+            <div class="car-info">
+                <h3 class="car-title">Lamborghini Huracán EVO</h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <span>Engine:</span>
+                        <span class="spec-value">5.2L V10</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Horsepower:</span>
+                        <span class="spec-value">630 hp</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>0-60 mph:</span>
+                        <span class="spec-value">2.9 s</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Top Speed:</span>
+                        <span class="spec-value">202 mph</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Drivetrain:</span>
+                        <span class="spec-value">AWD</span>
+                    </div>
+                </div>
+                <div class="car-features">
+                    <span class="feature">Predictive Logic</span>
+                    <span class="feature">LDVI System</span>
+                    <span class="feature">Rear-Wheel Steering</span>
+                    <span class="feature">Race Mode</span>
+                </div>
+                <span class="car-price">$261,274</span>
+                <button class="car-btn">Request a Test Drive</button>
+            </div>
+        </div>
+
+        <div class="car-card">
+            <span class="car-badge">Super SUV</span>
+            <img src="https://images.unsplash.com/photo-1566724513655-9b0eab6c2a30?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                 alt="Lamborghini Urus" class="car-image">
+            <div class="car-info">
+                <h3 class="car-title">Lamborghini Urus</h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <span>Engine:</span>
+                        <span class="spec-value">4.0L V8 Twin-Turbo</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Horsepower:</span>
+                        <span class="spec-value">641 hp</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>0-60 mph:</span>
+                        <span class="spec-value">3.6 s</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Top Speed:</span>
+                        <span class="spec-value">190 mph</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Seating:</span>
+                        <span class="spec-value">5 Passengers</span>
+                    </div>
+                </div>
+                <div class="car-features">
+                    <span class="feature">Off-road Mode</span>
+                    <span class="feature">Torque Vectoring</span>
+                    <span class="feature">Active Suspension</span>
+                    <span class="feature">Luxury Interior</span>
+                </div>
+                <span class="car-price">$229,495</span>
+                <button class="car-btn">Request a Test Drive</button>
+            </div>
+        </div>
+
+        <div class="car-card">
+            <span class="car-badge">Hybrid Hypercar</span>
+            <img src="https://images.unsplash.com/photo-1627911681907-353f269a9b2c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                 alt="Lamborghini Sian FKP 37" class="car-image">
+            <div class="car-info">
+                <h3 class="car-title">Lamborghini Sian FKP 37</h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <span>Engine:</span>
+                        <span class="spec-value">6.5L V12 Hybrid</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Horsepower:</span>
+                        <span class="spec-value">808 hp</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>0-60 mph:</span>
+                        <span class="spec-value">2.8 s</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Production:</span>
+                        <span class="spec-value">63 Units Only</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Technology:</span>
+                        <span class="spec-value">Supercapacitor</span>
+                    </div>
+                </div>
+                <div class="car-features">
+                    <span class="feature">V12 Hybrid</span>
+                    <span class="feature">Limited Edition</span>
+                    <span class="feature">Active Cooling</span>
+                    <span class="feature">Futuristic Design</span>
+                </div>
+                <span class="car-price">Price Upon Request</span>
+                <button class="car-btn">Request a Test Drive</button>
+            </div>
+        </div>
+
+        <div class="car-card">
+            <span class="car-badge">Track Focused</span>
+            <img src="https://images.unsplash.com/photo-1596707328114-c11956551b9e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                 alt="Lamborghini Huracán Performante" class="car-image">
+            <div class="car-info">
+                <h3 class="car-title">Lamborghini Huracán Performante</h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <span>Engine:</span>
+                        <span class="spec-value">5.2L V10</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Horsepower:</span>
+                        <span class="spec-value">631 hp</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>0-60 mph:</span>
+                        <span class="spec-value">2.9 s</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Top Speed:</span>
+                        <span class="spec-value">202 mph</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Weight:</span>
+                        <span class="spec-value">3,047 lbs</span>
+                    </div>
+                </div>
+                <div class="car-features">
+                    <span class="feature">Forged Carbon</span>
+                    <span class="feature">Active Aerodynamics</span>
+                    <span class="feature">Lighter Chassis</span>
+                    <span class="feature">Performance exhaust</span>
+                </div>
+                <span class="car-price">$274,390</span>
+                <button class="car-btn">Request a Test Drive</button>
+            </div>
+        </div>
+
+        <div class="car-card">
+            <span class="car-badge">Legendary Reborn</span>
+            <img src="https://images.unsplash.com/photo-1542362567-b07e54358753?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                 alt="Lamborghini Countach LPI 800-4" class="car-image">
+            <div class="car-info">
+                <h3 class="car-title">Lamborghini Countach</h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <span>Engine:</span>
+                        <span class="spec-value">6.5L V12 Hybrid</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Horsepower:</span>
+                        <span class="spec-value">803 hp</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>0-60 mph:</span>
+                        <span class="spec-value">2.8 s</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Top Speed:</span>
+                        <span class="spec-value">220 mph</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Production:</span>
+                        <span class="spec-value">112 Units Only</span>
+                    </div>
+                </div>
+                <div class="car-features">
+                    <span class="feature">Retro-futuristic</span>
+                    <span class="feature">Supercapacitor</span>
+                    <span class="feature">Limited Edition</span>
+                    <span class="feature">Iconic Design</span>
+                </div>
+                <span class="car-price">$2.64 Million</span>
+                <button class="car-btn">Request a Test Drive</button>
+            </div>
+        </div>
+    </div>
+
+    <section class="brand-info">
+        <h2>About the Lamborghini Brand</h2>
+        <p>
+            Lamborghini is an Italian manufacturer of luxury sports cars and SUVs.
+            Founded in 1963, it is known for its bold designs, breathtaking engine performance, and aggressive exhaust notes.
+            Lamborghini is a symbol of power, speed, and luxury, offering a unique and extraordinary driving experience.
+        </p>
+    </section>
+
+    <script>
+        // Scroll-in effects for cards
+        const carCards = document.querySelectorAll('.car-card');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        carCards.forEach((card, index) => {
+            // Add a staggered delay for each card
+            card.style.transitionDelay = `${index * 0.1}s`;
+            observer.observe(card);
+        });
+
+        // Test drive button functionality
+        const buttons = document.querySelectorAll('.car-btn');
+        buttons.forEach(button => {
+            button.addEventListener('click', function() {
+                const carName = this.closest('.car-card').querySelector('.car-title').textContent;
+                alert(`Thank you for your interest in the ${carName}! Our team will contact you within 24 hours to arrange your test drive.`);
+            });
+        });
+    </script>
+</body>
+</html>

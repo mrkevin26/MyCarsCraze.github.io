@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercedes-Benz Collection - CarsCraze</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #000;
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: rgba(0, 0, 0, 0.95);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 3px solid #00A4B4;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .main-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #00A4B4;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 30px;
+            padding: 0;
+            margin-bottom: 15px;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s ease;
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+
+        .nav-links a:hover {
+            color: #00A4B4;
+            background: rgba(0, 164, 180, 0.1);
+        }
+
+        .back-btn {
+            background: #00A4B4;
+            color: #fff;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .back-btn:hover {
+            background: #008B99;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 164, 180, 0.3);
+        }
+
+        .brand-hero {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)),
+                        url('https://images.unsplash.com/photo-1563720223880-4aaddb720d9f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .brand-logo {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 20px;
+            filter: brightness(0) invert(1);
+        }
+
+        .brand-hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #00A4B4;
+            text-transform: uppercase;
+        }
+
+        .brand-hero p {
+            font-size: 18px;
+            color: #ccc;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .cars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            padding: 60px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .car-card {
+            background: #1a1a1a;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid #333;
+            position: relative;
+        }
+
+        .car-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 164, 180, 0.3);
+            border-color: #00A4B4;
+        }
+
+        .car-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #00A4B4;
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 15px;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .car-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-bottom: 3px solid #00A4B4;
+        }
+
+        .car-info {
+            padding: 30px;
+        }
+
+        .car-title {
+            font-size: 28px;
+            color: #fff;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .car-specs {
+            color: #ccc;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #333;
+        }
+
+        .spec-value {
+            color: #00A4B4;
+            font-weight: 600;
+        }
+
+        .car-price {
+            font-size: 32px;
+            color: #00A4B4;
+            font-weight: bold;
+            margin: 25px 0;
+            text-align: center;
+            display: block;
+        }
+
+        .car-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .feature {
+            background: rgba(0, 164, 180, 0.2);
+            color: #00A4B4;
+            padding: 8px 15px;
+            border-radius: 15px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .car-btn {
+            background: linear-gradient(to right, #00A4B4, #008B99);
+            color: #fff;
+            border: none;
+            padding: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .car-btn:hover {
+            background: linear-gradient(to right, #008B99, #00727D);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 164, 180, 0.4);
+        }
+
+        .brand-info {
+            padding: 60px 20px;
+            background: #111;
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .brand-info h2 {
+            font-size: 36px;
+            color: #00A4B4;
+            margin-bottom: 30px;
+        }
+
+        .brand-info p {
+            font-size: 18px;
+            color: #ccc;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .cars-grid {
+                grid-template-columns: 1fr;
+                padding: 30px 15px;
+                gap: 30px;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .car-image {
+                height: 220px;
+            }
+
+            .car-info {
+                padding: 20px;
+            }
+
+            .car-title {
+                font-size: 24px;
+            }
+
+            .brand-hero {
+                padding: 60px 20px;
+            }
+
+            .brand-hero h1 {
+                font-size: 36px;
+            }
+        }
+
+        /* Hover effects */
+        .car-card {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+
+        .car-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1 class="main-title">MERCEDES-BENZ COLLECTION</h1>
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="collection.html">All Brands</a></li>
+                <li><a href="#mercedes-models">Mercedes Models</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <button class="back-btn" onclick="window.location.href='collection.html'">
+            ← Back to Collection
+        </button>
+    </header>
+
+    <section class="brand-hero">
+        <img src="https://www.logo.wine/a/logo/Mercedes-Benz/Mercedes-Benz-Logo.wine.svg" alt="Mercedes-Benz Logo" class="brand-logo">
+        <h1>Mercedes-Benz Premium Selection</h1>
+        <p>Experience the best or nothing with our exclusive collection of Mercedes-Benz vehicles.
+            From luxury sedans to powerful AMG series, discover German engineering excellence.</p>
+    </section>
+
+    <div class="cars-grid" id="mercedes-models">
+        <div class="car-card">
+            <span class="car-badge">AMG Performance</span>
+            <img src="https://images.unsplash.com/photo-1616789682173-1f1700675453?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                 alt="Mercedes-AMG GT" class="car-image">
+            <div class="car-info">
+                <h3 class="car-title">Mercedes-AMG GT</h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <span>Engine:</span>
+                        <span class="spec-value">4.0L V8 Biturbo</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Horsepower:</span>
+                        <span class="spec-value">523 hp</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>0-62 mph:</span>
+                        <span class="spec-value">3.6 seconds</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Top Speed:</span>
+                        <span class="spec-value">304 km/h</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Transmission:</span>
+                        <span class="spec-value">7-speed automatic</span>
+                    </div>
+                </div>
+                <div class="car-features">
+                    <span class="feature">AMG Dynamic Plus</span>
+                    <span class="feature">Carbon Package</span>
+                    <span class="feature">Performance Exhaust</span>
+                    <span class="feature">RWD</span>
+                </div>
+                <span class="car-price">$115,000</span>
+                <button class="car-btn">Request a Test Drive</button>
+            </div>
+        </div>
+
+        <div class="car-card">
+            <span class="car-badge">AMG Performance</span>
+            <img src="https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80"
+                 alt="Mercedes-AMG E63 S" class="car-image">
+            <div class="car-info">
+                <h3 class="car-title">Mercedes-AMG E63 S</h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <span>Engine:</span>
+                        <span class="spec-value">4.0L V8 Biturbo</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Horsepower:</span>
+                        <span class="spec-value">612 hp</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>0-62 mph:</span>
+                        <span class="spec-value">3.3 seconds</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Top Speed:</span>
+                        <span class="spec-value">300 km/h</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Drive System:</span>
+                        <span class="spec-value">4MATIC+</span>
+                    </div>
+                </div>
+                <div class="car-features">
+                    <span class="feature">Drift Mode</span>
+                    <span class="feature">AMG Performance</span>
+                    <span class="feature">Race Start</span>
+                    <span class="feature">AWD</span>
+                </div>
+                <span class="car-price">$110,000</span>
+                <button class="car-btn">Request a Test Drive</button>
+            </div>
+        </div>
+
+        <div class="car-card">
+            <span class="car-badge">Luxury SUV</span>
+            <img src="https://images.unsplash.com/photo-1577372794873-e6b8efa7dcc3?q=80&w=1315&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                 alt="Mercedes G-Class" class="car-image">
+            <div class="car-info">
+                <h3 class="car-title">Mercedes-Benz G63 AMG</h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <span>Engine:</span>
+                        <span class="spec-value">4.0L V8 Biturbo</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Horsepower:</span>
+                        <span class="spec-value">577 hp</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>0-62 mph:</span>
+                        <span class="spec-value">4.5 seconds</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Capacity:</span>
+                        <span class="spec-value">5 Passengers</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Drive System:</span>
+                        <span class="spec-value">4x4</span>
+                    </div>
+                </div>
+                <div class="car-features">
+                    <span class="feature">AMG Line</span>
+                    <span class="feature">Off-Road Package</span>
+                    <span class="feature">Designo Interior</span>
+                    <span class="feature">3 Locking Diffs</span>
+                </div>
+                <span class="car-price">$165,000</span>
+                <button class="car-btn">Request a Test Drive</button>
+            </div>
+        </div>
+
+        <div class="car-card">
+            <span class="car-badge">Flagship Luxury</span>
+            <img src="https://images.unsplash.com/photo-1629019879059-2a0345f93aea?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                 alt="Mercedes S-Class" class="car-image">
+            <div class="car-info">
+                <h3 class="car-title">Mercedes-Benz S580</h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <span>Engine:</span>
+                        <span class="spec-value">4.0L V8 Biturbo</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Horsepower:</span>
+                        <span class="spec-value">496 hp</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>0-62 mph:</span>
+                        <span class="spec-value">4.7 seconds</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Trim:</span>
+                        <span class="spec-value">Executive</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Drive System:</span>
+                        <span class="spec-value">4MATIC</span>
+                    </div>
+                </div>
+                <div class="car-features">
+                    <span class="feature">MBUX Hyperscreen</span>
+                    <span class="feature">Rear Executive</span>
+                    <span class="feature">Burmester Sound</span>
+                    <span class="feature">E-Active Body</span>
+                </div>
+                <span class="car-price">$120,000</span>
+                <button class="car-btn">Request a Test Drive</button>
+            </div>
+        </div>
+
+        <div class="car-card">
+            <span class="car-badge">4-Door Coupe</span>
+            <img src="http://googleusercontent.com/image_collection/image_retrieval/14661775792988866543_0"
+                 alt="Mercedes CLS" class="car-image">
+            <div class="car-info">
+                <h3 class="car-title">Mercedes-Benz CLS450</h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <span>Engine:</span>
+                        <span class="spec-value">3.0L Inline-6 Turbo</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Horsepower:</span>
+                        <span class="spec-value">362 hp</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>0-62 mph:</span>
+                        <span class="spec-value">4.8 seconds</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Top Speed:</span>
+                        <span class="spec-value">250 km/h</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Transmission:</span>
+                        <span class="spec-value">9-speed automatic</span>
+                    </div>
+                </div>
+                <div class="car-features">
+                    <span class="feature">AMG Line</span>
+                    <span class="feature">Panoramic Roof</span>
+                    <span class="feature">Air Body Control</span>
+                    <span class="feature">4MATIC</span>
+                </div>
+                <span class="car-price">$75,000</span>
+                <button class="car-btn">Request a Test Drive</button>
+            </div>
+        </div>
+
+        <div class="car-card">
+            <span class="car-badge">Electric SUV</span>
+            <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                 alt="Mercedes EQC" class="car-image">
+            <div class="car-info">
+                <h3 class="car-title">Mercedes-Benz EQC 400</h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <span>Engine:</span>
+                        <span class="spec-value">Dual Electric Motors</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Horsepower:</span>
+                        <span class="spec-value">408 hp</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>0-62 mph:</span>
+                        <span class="spec-value">5.1 seconds</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Range:</span>
+                        <span class="spec-value">417 km</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Fast Charge:</span>
+                        <span class="spec-value">40 minutes</span>
+                    </div>
+                </div>
+                <div class="car-features">
+                    <span class="feature">EQ Technology</span>
+                    <span class="feature">MBUX System</span>
+                    <span class="feature">Panoramic Roof</span>
+                    <span class="feature">AWD Electric</span>
+                </div>
+                <span class="car-price">$70,000</span>
+                <button class="car-btn">Request a Test Drive</button>
+            </div>
+        </div>
+    </div>
+
+    <section class="brand-info">
+        <h2>About Mercedes-Benz</h2>
+        <p>
+            Mercedes-Benz is a leading German luxury automobile manufacturer.
+            Founded in 1926 and headquartered in Stuttgart, Mercedes-Benz is renowned for its
+            luxury car series with distinctive design and advanced technology, in addition to its
+            AMG division which produces high-performance vehicles. Mercedes-Benz offers a unique driving
+            experience that combines luxury, performance, and technological innovation, with a
+            focus on safety, comfort, and sustainability.
+        </p>
+    </section>
+
+    <script>
+        // Scroll effects for the cards
+        const carCards = document.querySelectorAll('.car-card');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        carCards.forEach((card, index) => {
+            // Stagger the appearance of each card sequentially
+            card.style.transitionDelay = `${index * 0.1}s`;
+            observer.observe(card);
+        });
+
+        // Test drive request button functionality
+        const buttons = document.querySelectorAll('.car-btn');
+        buttons.forEach(button => {
+            button.addEventListener('click', function() {
+                const carName = this.closest('.car-card').querySelector('.car-title').textContent;
+                alert(`Thank you for your interest in the ${carName}! Our team will contact you within 24 hours to arrange a test drive.`);
+            });
+        });
+    </script>
+</body>
+</html>

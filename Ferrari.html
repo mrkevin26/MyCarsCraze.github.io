@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferrari Collection - CarsCraze</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #000;
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: rgba(0, 0, 0, 0.95);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 3px solid #E30A13; /* Ferrari Red */
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .main-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #E30A13; /* Ferrari Red */
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 30px;
+            padding: 0;
+            margin-bottom: 15px;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s ease;
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+
+        .nav-links a:hover {
+            color: #E30A13; /* Ferrari Red */
+            background: rgba(227, 10, 19, 0.1); /* Transparent Ferrari Red */
+        }
+
+        .back-btn {
+            background: linear-gradient(to right, #2c2c2c, #E30A13); /* Black-Red gradient */
+            color: #fff;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .back-btn:hover {
+            background: linear-gradient(to right, #000, #a90710); /* Darker gradient */
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(227, 10, 19, 0.3); /* Red shadow */
+        }
+
+        .brand-hero {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)),
+                        url('https://images.unsplash.com/photo-1616799049755-fe703c7e7b3c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .brand-logo {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 20px;
+        }
+
+        .brand-hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #E30A13; /* Ferrari Red */
+            text-transform: uppercase;
+        }
+
+        .brand-hero p {
+            font-size: 18px;
+            color: #ccc;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .cars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            padding: 60px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .car-card {
+            background: #1a1a1a;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid #333;
+            position: relative;
+        }
+
+        .car-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(227, 10, 19, 0.3); /* Red shadow */
+            border-color: #E30A13; /* Ferrari Red */
+        }
+
+        .car-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #E30A13; /* Ferrari Red */
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 15px;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .car-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-bottom: 3px solid #E30A13; /* Ferrari Red */
+        }
+
+        .car-info {
+            padding: 30px;
+        }
+
+        .car-title {
+            font-size: 28px;
+            color: #fff;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .car-specs {
+            color: #ccc;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #333;
+        }
+
+        .spec-value {
+            color: #E30A13; /* Ferrari Red */
+            font-weight: 600;
+        }
+
+        .car-price {
+            font-size: 32px;
+            color: #E30A13; /* Ferrari Red */
+            font-weight: bold;
+            margin: 25px 0;
+            text-align: center;
+            display: block;
+        }
+
+        .car-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .feature {
+            background: rgba(227, 10, 19, 0.2); /* Transparent Red */
+            color: #E30A13; /* Ferrari Red */
+            padding: 8px 15px;
+            border-radius: 15px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .car-btn {
+            background: linear-gradient(to right, #2c2c2c, #E30A13); /* Black-Red gradient */
+            color: #fff;
+            border: none;
+            padding: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .car-btn:hover {
+            background: linear-gradient(to right, #000, #a90710); /* Darker gradient */
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(227, 10, 19, 0.4);
+        }
+
+        .brand-info {
+            padding: 60px 20px;
+            background: #111;
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .brand-info h2 {
+            font-size: 36px;
+            color: #E30A13; /* Ferrari Red */
+            margin-bottom: 30px;
+        }
+
+        .brand-info p {
+            font-size: 18px;
+            color: #ccc;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .cars-grid {
+                grid-template-columns: 1fr;
+                padding: 30px 15px;
+                gap: 30px;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .car-image {
+                height: 220px;
+            }
+
+            .car-info {
+                padding: 20px;
+            }
+
+            .car-title {
+                font-size: 24px;
+            }
+
+            .brand-hero {
+                padding: 60px 20px;
+            }
+
+            .brand-hero h1 {
+                font-size: 36px;
+            }
+        }
+
+        /* Scroll-in effects */
+        .car-card {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+
+        .car-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1 class="main-title">FERRARI COLLECTION</h1>
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="collection.html">All Brands</a></li>
+                <li><a href="#ferrari-models">Ferrari Models</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
+        </nav>
+        <button class="back-btn" onclick="window.location.href='collection.html'">
+            ← Back to Collection
+        </button>
+    </header>
+
+    <section class="brand-hero">
+        <img src="https://www.logo.wine/a/logo/Ferrari/Ferrari-Logo.wine.svg" alt="Ferrari Logo" class="brand-logo">
+        <h1>The Ferrari Supercar Lineup</h1>
+        <p>Explore the world of Ferrari's passion and performance. Legendary cars with unparalleled design and a rich history.</p>
+    </section>
+
+    <div class="cars-grid" id="ferrari-models">
+        <div class="car-card">
+            <span class="car-badge">V8 Turbo</span>
+            <img src="https://images.unsplash.com/photo-1627911681907-353f269a9b2c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                 alt="Ferrari 488 GTB" class="car-image">
+            <div class="car-info">
+                <h3 class="car-title">Ferrari 488 GTB</h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <span>Engine:</span>
+                        <span class="spec-value">3.9L Twin-Turbo V8</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Horsepower:</span>
+                        <span class="spec-value">661 hp</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>0-60 mph:</span>
+                        <span class="spec-value">3.0 s</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Top Speed:</span>
+                        <span class="spec-value">205+ mph</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Transmission:</span>
+                        <span class="spec-value">7-speed DCT</span>
+                    </div>
+                </div>
+                <div class="car-features">
+                    <span class="feature">Track Performance</span>
+                    <span class="feature">Aggressive Aerodynamics</span>
+                    <span class="feature">F1-Trac Traction Control</span>
+                    <span class="feature">Race Car DNA</span>
+                </div>
+                <span class="car-price">$252,800</span>
+                <button class="car-btn">Request a Test Drive</button>
+            </div>
+        </div>
+
+        <div class="car-card">
+            <span class="car-badge">Iconic V12</span>
+            <img src="https://images.unsplash.com/photo-1571449488390-e2b2f768b55c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                 alt="Ferrari 812 Superfast" class="car-image">
+            <div class="car-info">
+                <h3 class="car-title">Ferrari 812 Superfast</h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <span>Engine:</span>
+                        <span class="spec-value">6.5L V12</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Horsepower:</span>
+                        <span class="spec-value">789 hp</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>0-60 mph:</span>
+                        <span class="spec-value">2.9 s</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Top Speed:</span>
+                        <span class="spec-value">211+ mph</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Drivetrain:</span>
+                        <span class="spec-value">RWD</span>
+                    </div>
+                </div>
+                <div class="car-features">
+                    <span class="feature">Front-Engine V12</span>
+                    <span class="feature">Superfast Handling</span>
+                    <span class="feature">Rear-Wheel Steering</span>
+                    <span class="feature">Grand Tourer</span>
+                </div>
+                <span class="car-price">$335,000</span>
+                <button class="car-btn">Request a Test Drive</button>
+            </div>
+        </div>
+
+        <div class="car-card">
+            <span class="car-badge">SUV Crossover</span>
+            <img src="https://images.unsplash.com/photo-1669528277203-b0e27161b9e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                 alt="Ferrari Purosangue" class="car-image">
+            <div class="car-info">
+                <h3 class="car-title">Ferrari Purosangue</h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <span>Engine:</span>
+                        <span class="spec-value">6.5L V12</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Horsepower:</span>
+                        <span class="spec-value">715 hp</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>0-60 mph:</span>
+                        <span class="spec-value">3.3 s</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Top Speed:</span>
+                        <span class="spec-value">193 mph</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Seating:</span>
+                        <span class="spec-value">4 Passengers</span>
+                    </div>
+                </div>
+                <div class="car-features">
+                    <span class="feature">First Ferrari SUV</span>
+                    <span class="feature">All-Wheel Drive</span>
+                    <span class="feature">Active Suspension</span>
+                    <span class="feature">Luxury and Utility</span>
+                </div>
+                <span class="car-price">$400,000</span>
+                <button class="car-btn">Request a Test Drive</button>
+            </div>
+        </div>
+
+        <div class="car-card">
+            <span class="car-badge">Hybrid Hypercar</span>
+            <img src="https://images.unsplash.com/photo-1522045585573-0660636ae529?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                 alt="Ferrari SF90 Stradale" class="car-image">
+            <div class="car-info">
+                <h3 class="car-title">Ferrari SF90 Stradale</h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <span>Engine:</span>
+                        <span class="spec-value">4.0L V8 Twin-Turbo Hybrid</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Horsepower:</span>
+                        <span class="spec-value">986 hp</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>0-60 mph:</span>
+                        <span class="spec-value">2.5 s</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Top Speed:</span>
+                        <span class="spec-value">211 mph</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Technology:</span>
+                        <span class="spec-value">PHEV System</span>
+                    </div>
+                </div>
+                <div class="car-features">
+                    <span class="feature">Plug-in Hybrid</span>
+                    <span class="feature">All-Wheel Drive</span>
+                    <span class="feature">Record-Breaking Power</span>
+                    <span class="feature">Advanced Aerodynamics</span>
+                </div>
+                <span class="car-price">$507,000</span>
+                <button class="car-btn">Request a Test Drive</button>
+            </div>
+        </div>
+
+        <div class="car-card">
+            <span class="car-badge">Track Special</span>
+            <img src="https://images.unsplash.com/photo-1582294154823-74a621796d18?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                 alt="Ferrari 458 Speciale" class="car-image">
+            <div class="car-info">
+                <h3 class="car-title">Ferrari 458 Speciale</h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <span>Engine:</span>
+                        <span class="spec-value">4.5L Naturally Aspirated V8</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Horsepower:</span>
+                        <span class="spec-value">597 hp</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>0-60 mph:</span>
+                        <span class="spec-value">3.0 s</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Top Speed:</span>
+                        <span class="spec-value">202 mph</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Weight:</span>
+                        <span class="spec-value">3,075 lbs</span>
+                    </div>
+                </div>
+                <div class="car-features">
+                    <span class="feature">Naturally Aspirated V8</span>
+                    <span class="feature">Pure Driving Experience</span>
+                    <span class="feature">Lightweight Design</span>
+                    <span class="feature">Iconic Sound</span>
+                </div>
+                <span class="car-price">$298,000</span>
+                <button class="car-btn">Request a Test Drive</button>
+            </div>
+        </div>
+
+        <div class="car-card">
+            <span class="car-badge">The Hypercar</span>
+            <img src="https://images.unsplash.com/photo-1549488346-65529f55e5d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                 alt="LaFerrari" class="car-image">
+            <div class="car-info">
+                <h3 class="car-title">LaFerrari</h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <span>Engine:</span>
+                        <span class="spec-value">6.3L V12 Hybrid</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Horsepower:</span>
+                        <span class="spec-value">950 hp</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>0-60 mph:</span>
+                        <span class="spec-value">2.4 s</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Top Speed:</span>
+                        <span class="spec-value">217+ mph</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Production:</span>
+                        <span class="spec-value">499 Units Only</span>
+                    </div>
+                </div>
+                <div class="car-features">
+                    <span class="feature">Limited Production</span>
+                    <span class="feature">KERS System</span>
+                    <span class="feature">Ultimate Performance</span>
+                    <span class="feature">Collector's Item</span>
+                </div>
+                <span class="car-price">Price Upon Request</span>
+                <button class="car-btn">Request a Test Drive</button>
+            </div>
+        </div>
+    </div>
+
+    <section class="brand-info">
+        <h2>About the Ferrari Brand</h2>
+        <p>
+            Ferrari is a renowned Italian manufacturer of luxury sports cars, founded in 1939 by Enzo Ferrari.
+            The brand is famous for producing iconic cars with exceptional performance and stunning design,
+            symbolizing speed and luxury. Ferrari is distinguished by its Prancing Horse emblem 🐴 and its rich history in Formula 1 racing.
+        </p>
+    </section>
+
+    <script>
+        // Scroll-in effects for cards
+        const carCards = document.querySelectorAll('.car-card');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        carCards.forEach((card, index) => {
+            // Add a staggered delay for each card
+            card.style.transitionDelay = `${index * 0.1}s`;
+            observer.observe(card);
+        });
+
+        // Test drive button functionality
+        const buttons = document.querySelectorAll('.car-btn');
+        buttons.forEach(button => {
+            button.addEventListener('click', function() {
+                const carName = this.closest('.car-card').querySelector('.car-title').textContent;
+                alert(`Thank you for your interest in the ${carName}! Our team will contact you within 24 hours to arrange your test drive.`);
+            });
+        });
+    </script>
+</body>
+</html>

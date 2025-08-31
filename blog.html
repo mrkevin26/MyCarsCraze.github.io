@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المدونة - CarsCraze</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: #000;
+            color: #fff;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: rgba(0, 0, 0, 0.95);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 3px solid #c89b3c;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .main-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #c89b3c;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+        
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 30px;
+            padding: 0;
+            margin-bottom: 15px;
+        }
+        
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s ease;
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+        
+        .nav-links a:hover {
+            color: #c89b3c;
+            background: rgba(200, 155, 60, 0.1);
+        }
+        
+        .back-btn {
+            background: #c89b3c;
+            color: #000;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+        
+        .back-btn:hover {
+            background: #b88a2d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(200, 155, 60, 0.3);
+        }
+        
+        .blog-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        
+        .blog-hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
+                       url('https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            margin-bottom: 50px;
+        }
+        
+        .blog-hero h2 {
+            font-size: 48px;
+            color: #c89b3c;
+            margin-bottom: 20px;
+        }
+        
+        .blog-hero p {
+            font-size: 18px;
+            color: #ccc;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .categories {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .category-btn {
+            background: transparent;
+            color: #fff;
+            border: 2px solid #c89b3c;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .category-btn.active,
+        .category-btn:hover {
+            background: #c89b3c;
+            color: #000;
+        }
+        
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+        }
+        
+        .blog-card {
+            background: #1a1a1a;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            border: 1px solid #333;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-10px);
+            border-color: #c89b3c;
+        }
+        
+        .blog-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 3px solid #c89b3c;
+        }
+        
+        .blog-content {
+            padding: 25px;
+        }
+        
+        .blog-category {
+            background: rgba(200, 155, 60, 0.2);
+            color: #c89b3c;
+            padding: 8px 15px;
+            border-radius: 15px;
+            font-size: 14px;
+            font-weight: 500;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        .blog-title {
+            font-size: 24px;
+            color: #fff;
+            margin-bottom: 15px;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+        
+        .blog-excerpt {
+            color: #ccc;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #666;
+            font-size: 14px;
+            border-top: 1px solid #333;
+            padding-top: 15px;
+        }
+        
+        .read-more {
+            background: transparent;
+            color: #c89b3c;
+            border: 2px solid #c89b3c;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .read-more:hover {
+            background: #c89b3c;
+            color: #000;
+        }
+        
+        .newsletter {
+            background: #1a1a1a;
+            padding: 50px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 80px;
+            border: 2px solid #333;
+        }
+        
+        .newsletter h3 {
+            color: #c89b3c;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        
+        .newsletter p {
+            color: #ccc;
+            margin-bottom: 30px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            gap: 15px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #333;
+            border-radius: 8px;
+            background: #2a2a2a;
+            color: #fff;
+            font-size: 16px;
+        }
+        
+        .newsletter-input:focus {
+            outline: none;
+            border-color: #c89b3c;
+        }
+        
+        .newsletter-btn {
+            background: linear-gradient(to right, #c89b3c, #9b722d);
+            color: #000;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .newsletter-btn:hover {
+            background: linear-gradient(to right, #b88a2d, #8a6728);
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .categories {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .category-btn {
+                width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- الهيدر -->
+    <header class="header">
+        <h1 class="main-title">مدونة CarsCraze</h1>
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="collection.html">المجموعة</a></li>
+                <li><a href="ratings.html">التقييمات</a></li>
+                <li><a href="shop.html">المتجر</a></li>
+            </ul>
+        </nav>
+        <button class="back-btn" onclick="window.location.href='index.html'">
+            ← العودة للرئيسية
+        </button>
+    </header>
+
+    <div class="blog-container">
+        <!-- قسم البطل -->
+        <div class="blog-hero">
+            <h2>أحدث أخبار السيارات</h2>
+            <p>كن أول من يعرف عن أحدث الموديلات، التقنيات، ونصائح الصيانة</p>
+        </div>
+
+        <!-- التصنيفات -->
+        <div class="categories">
+            <button class="category-btn active">جميع المقالات</button>
+            <button class="category-btn">أخبار السوق</button>
+            <button class="category-btn">مراجعات السيارات</button>
+            <button class="category-btn">نصائح الصيانة</button>
+            <button class="category-btn">تقنيات حديثة</button>
+        </div>
+
+        <!-- مقالات المدونة -->
+        <div class="blog-grid">
+            <!-- مقال 1 -->
+            <div class="blog-card">
+                <img src="https://images.unsplash.com/photo-1563720223880-4aaddb720d9f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                     alt="BMW M8 Review" class="blog-image">
+                <div class="blog-content">
+                    <span class="blog-category">مراجعات السيارات</span>
+                    <h3 class="blog-title">مراجعة شاملة: BMW M8 Competition 2024</h3>
+                    <p class="blog-excerpt">
+                        اكتشف لماذا تعتبر BMW M8 Competition واحدة من أفضل سيارات السيدان 
+                        الرياضية في العالم. أداء مذهل وتصميم أنيق وتقنيات متطورة...
+                    </p>
+                    <div class="blog-meta">
+                        <span>15 يناير 2024</span>
+                        <span>12 دقيقة قراءة</span>
+                    </div>
+                    <a href="#" class="read-more">قراءة المزيد</a>
+                </div>
+            </div>
+
+            <!-- مقال 2 -->
+            <div class="blog-card">
+                <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                     alt="Car Maintenance" class="blog-image">
+                <div class="blog-content">
+                    <span class="blog-category">نصائح الصيانة</span>
+                    <h3 class="blog-title">10 نصائح أساسية للحفاظ على سيارتك الفاخرة</h3>
+                    <p class="blog-excerpt">
+                        تعلم كيفية العناية بسيارتك الفاخرة للحفاظ على قيمتها وأدائها. 
+                        من تغيير الزيت إلى العناية بالداخلية، كل ما تحتاج معرفته...
+                    </p>
+                    <div class="blog-meta">
+                        <span>12 يناير 2024</span>
+                        <span>8 دقائق قراءة</span>
+                    </div>
+                    <a href="#" class="read-more">قراءة المزيد</a>
+                </div>
+            </div>
+
+            <!-- مقال 3 -->
+            <div class="blog-card">
+                <img src="https://images.unsplash.com/photo-1560958089-b8a1929cea89?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                     alt="Electric Cars" class="blog-image">
+                <div class="blog-content">
+                    <span class="blog-category">تقنيات حديثة</span>
+                    <h3 class="blog-title">مستقبل السيارات الكهربائية: ما يمكن توقعه في 2024</h3>
+                    <p class="blog-excerpt">
+                        مع تطور تقنيات البطاريات والقيادة الذاتية، كيف ستغير السيارات الكهربائية 
+                        صناعة السيارات؟ اكتشف أحدث التوجهات والتقنيات...
+                    </p>
+                    <div class="blog-meta">
+                        <span>8 يناير 2024</span>
+                        <span>10 دقائق قراءة</span>
+                    </div>
+                    <a href="#" class="read-more">قراءة المزيد</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- النشرة البريدية -->
+        <div class="newsletter">
+            <h3>اشترك في نشرتنا البريدية</h3>
+            <p>كن أول من يعرف عن أحدث السيارات، العروض الخاصة، وأخبار السوق</p>
+            <div class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="بريدك الإلكتروني">
+                <button class="newsletter-btn">اشترك الآن</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // تفاعل أزرار التصنيفات
+        const categoryButtons = document.querySelectorAll('.category-btn');
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                categoryButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                // هنا يمكنك إضافة فلترة المقالات
+            });
+        });
+        
+        // تأثيرات الظهور
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.blog-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+        
+        // النشرة البريدية
+        document.querySelector('.newsletter-btn').addEventListener('click', function() {
+            const email = document.querySelector('.newsletter-input').value;
+            if (email && email.includes('@')) {
+                alert(`شكراً لك! تم الاشتراك بالنشرة البريدية بنجاح.`);
+                document.querySelector('.newsletter-input').value = '';
+            } else {
+                alert('الرجاء إدخال بريد إلكتروني صحيح');
+            }
+        });
+    </script>
+</body>
+</html>

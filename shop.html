@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المتجر - CarsCraze</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: #000;
+            color: #fff;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: rgba(0, 0, 0, 0.95);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 3px solid #c89b3c;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .main-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #c89b3c;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+        
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 30px;
+            padding: 0;
+            margin-bottom: 15px;
+        }
+        
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s ease;
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+        
+        .nav-links a:hover {
+            color: #c89b3c;
+            background: rgba(200, 155, 60, 0.1);
+        }
+        
+        .back-btn {
+            background: #c89b3c;
+            color: #000;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+        
+        .back-btn:hover {
+            background: #b88a2d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(200, 155, 60, 0.3);
+        }
+        
+        .shop-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        
+        .shop-hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
+                       url('https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            margin-bottom: 50px;
+        }
+        
+        .shop-hero h2 {
+            font-size: 48px;
+            color: #c89b3c;
+            margin-bottom: 20px;
+        }
+        
+        .shop-hero p {
+            font-size: 18px;
+            color: #ccc;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .categories {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .category-btn {
+            background: transparent;
+            color: #fff;
+            border: 2px solid #c89b3c;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .category-btn.active,
+        .category-btn:hover {
+            background: #c89b3c;
+            color: #000;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .product-card {
+            background: #1a1a1a;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            border: 1px solid #333;
+            position: relative;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            border-color: #c89b3c;
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #c89b3c;
+            color: #000;
+            padding: 5px 12px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 12px;
+            z-index: 2;
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 3px solid #c89b3c;
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-title {
+            font-size: 20px;
+            color: #fff;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .product-description {
+            color: #ccc;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            height: 60px;
+            overflow: hidden;
+        }
+        
+        .product-price {
+            font-size: 24px;
+            color: #c89b3c;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .original-price {
+            text-decoration: line-through;
+            color: #666;
+            font-size: 16px;
+            margin-left: 10px;
+        }
+        
+        .product-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .add-to-cart {
+            background: linear-gradient(to right, #c89b3c, #9b722d);
+            color: #000;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            flex: 1;
+            transition: all 0.3s ease;
+        }
+        
+        .add-to-cart:hover {
+            background: linear-gradient(to right, #b88a2d, #8a6728);
+            transform: translateY(-2px);
+        }
+        
+        .wishlist-btn {
+            background: transparent;
+            color: #fff;
+            border: 2px solid #333;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .wishlist-btn:hover {
+            border-color: #c89b3c;
+            color: #c89b3c;
+        }
+        
+        .cart-section {
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 50px;
+            border: 2px solid #333;
+        }
+        
+        .cart-items {
+            margin-bottom: 20px;
+        }
+        
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #333;
+        }
+        
+        .cart-item-image {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-left: 15px;
+        }
+        
+        .cart-item-info {
+            flex: 1;
+        }
+        
+        .cart-item-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .cart-item-price {
+            color: #c89b3c;
+            font-weight: 600;
+        }
+        
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0 20px;
+        }
+        
+        .quantity-btn {
+            background: #333;
+            color: #fff;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .quantity-btn:hover {
+            background: #c89b3c;
+        }
+        
+        .remove-item {
+            color: #ff4444;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 5px;
+        }
+        
+        .cart-total {
+            text-align: center;
+            font-size: 24px;
+            color: #c89b3c;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        
+        .checkout-btn {
+            background: linear-gradient(to right, #c89b3c, #9b722d);
+            color: #000;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 18px;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .checkout-btn:hover {
+            background: linear-gradient(to right, #b88a2d, #8a6728);
+            transform: translateY(-2px);
+        }
+        
+        .empty-cart {
+            text-align: center;
+            color: #666;
+            padding: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .categories {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .category-btn {
+                width: 200px;
+            }
+            
+            .cart-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .cart-item-quantity {
+                margin: 15px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- الهيدر -->
+    <header class="header">
+        <h1 class="main-title">متجر CarsCraze</h1>
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="collection.html">المجموعة</a></li>
+                <li><a href="blog.html">المدونة</a></li>
+                <li><a href="ratings.html">التقييمات</a></li>
+            </ul>
+        </nav>
+        <button class="back-btn" onclick="window.location.href='index.html'">
+            ← العودة للرئيسية
+        </button>
+    </header>
+
+    <div class="shop-container">
+        <!-- قسم البطل -->
+        <div class="shop-hero">
+            <h2>اكسسوارات سيارات فاخرة</h2>
+            <p>اكتشف مجموعة مميزة من اكسسوارات السيارات عالية الجودة لسيارتك الفاخرة</p>
+        </div>
+
+        <!-- التصنيفات -->
+        <div class="categories">
+            <button class="category-btn active">جميع المنتجات</button>
+            <button class="category-btn">داخلية السيارة</button>
+            <button class="category-btn">خارجية السيارة</button>
+            <button class="category-btn">عناية وتلميع</button>
+            <button class="category-btn">إلكترونيات</button>
+        </div>
+
+        <!-- المنتجات -->
+        <div class="products-grid">
+            <!-- منتج 1 -->
+            <div class="product-card">
+                <span class="product-badge">الأكثر مبيعاً</span>
+                <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                     alt="Car Cover" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">غلاف سيارة فاخر</h3>
+                    <p class="product-description">غلاف مقاوم للماء والحرارة، مصمم خصيصاً للسيارات الفاخرة</p>
+                    <span class="product-price">299 ر.س <span class="original-price">399 ر.س</span></span>
+                    <div class="product-actions">
+                        <button class="add-to-cart" onclick="addToCart('غلاف سيارة فاخر', 299, this)">
+                            أضف إلى السلة
+                        </button>
+                        <button class="wishlist-btn">♥</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- منتج 2 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1563720223880-4aaddb720d9f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                     alt="Leather Cleaner" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">منظف جلد طبيعي</h3>
+                    <p class="product-description">منظف متخصص لمقاعد الجلد الفاخر، يحافظ على النعومة واللمعان</p>
+                    <span class="product-price">149 ر.س</span>
+                    <div class="product-actions">
+                        <button class="add-to-cart" onclick="addToCart('منظف جلد طبيعي', 149, this)">
+                            أضف إلى السلة
+                        </button>
+                        <button class="wishlist-btn">♥</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- منتج 3 -->
+            <div class="product-card">
+                <span class="product-badge">جديد</span>
+                <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                     alt="Car Phone Mount" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">حامل هاتف ممغنط</h3>
+                    <p class="product-description">حامل قوي وممغنط، مناسب لجميع أنواع الهواتف والسيارات</p>
+                    <span class="product-price">89 ر.س</span>
+                    <div class="product-actions">
+                        <button class="add-to-cart" onclick="addToCart('حامل هاتف ممغنط', 89, this)">
+                            أضف إلى السلة
+                        </button>
+                        <button class="wishlist-btn">♥</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- سلة التسوق -->
+        <div class="cart-section">
+            <h3 style="color: #c89b3c; margin-bottom: 20px; text-align: center;">سلة التسوق</h3>
+            <div class="cart-items" id="cartItems">
+                <div class="empty-cart">سلة التسوق فارغة</div>
+            </div>
+            <div class="cart-total" id="cartTotal" style="display: none;">
+                المجموع: <span id="totalAmount">0</span> ر.س
+            </div>
+            <button class="checkout-btn" id="checkoutBtn" style="display: none;" onclick="checkout()">
+                اتمام الشراء
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let cart = [];
+        let total = 0;
+        
+        // إضافة إلى السلة
+        function addToCart(name, price, button) {
+            const existingItem = cart.find(item => item.name === name);
+            
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({
+                    name: name,
+                    price: price,
+                    quantity: 1,
+                    image: button.closest('.product-card').querySelector('.product-image').src
+                });
+            }
+            
+            updateCart();
+            button.textContent = '✓ تم الإضافة';
+            button.style.background = 'green';
+            
+            setTimeout(() => {
+                button.textContent = 'أضف إلى السلة';
+                button.style.background = '';
+            }, 2000);
+        }
+        
+        // تحديث السلة
+        function updateCart() {
+            const cartItems = document.getElementById('cartItems');
+            const cartTotal = document.getElementById('cartTotal');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+            const totalAmount = document.getElementById('totalAmount');
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<div class="empty-cart">سلة التسوق فارغة</div>';
+                cartTotal.style.display = 'none';
+                checkoutBtn.style.display = 'none';
+                return;
+            }
+            
+            cartItems.innerHTML = '';
+            total = 0;
+            
+            cart.forEach((item, index) => {
+                total += item.price * item.quantity;
+                
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                    <div class="cart-item-info">
+                        <div class="cart-item-title">${item.name}</div>
+                        <div class="cart-item-price">${item.price} ر.س</div>
+                    </div>
+                    <div class="cart-item-quantity">
+                        <button class="quantity-btn" onclick="changeQuantity(${index}, -1)">-</button>
+                        <span>${item.quantity}</span>
+                        <button class="quantity-btn" onclick="changeQuantity(${index}, 1)">+</button>
+                    </div>
+                    <button class="remove-item" onclick="removeItem(${index})">×</button>
+                `;
+                
+                cartItems.appendChild(cartItem);
+            });
+            
+            totalAmount.textContent = total;
+            cartTotal.style.display = 'block';
+            checkoutBtn.style.display = 'block';
+        }
+        
+        // تغيير الكمية
+        function changeQuantity(index, change) {
+            cart[index].quantity += change;
+            
+            if (cart[index].quantity <= 0) {
+                cart.splice(index, 1);
+            }
+            
+            updateCart();
+        }
+        
+        // إزالة المنتج
+        function removeItem(index) {
+            cart.splice(index, 1);
+            updateCart();
+        }
+        
+        // اتمام الشراء
+        function checkout() {
+            if (cart.length === 0) {
+                alert('سلة التسوق فارغة');
+                return;
+            }
+            
+            alert(`شكراً لشرائك!\nتم طلب منتجاتك بقيمة ${total} ر.س\nسيتم التواصل معك خلال 24 ساعة.`);
+            cart = [];
+            updateCart();
+        }
+        
+        // تفاعل أزرار التصنيفات
+        const categoryButtons = document.querySelectorAll('.category-btn');
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                categoryButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                // هنا يمكنك إضافة فلترة المنتجات
+            });
+        });
+        
+        // تأثيرات الظهور
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>

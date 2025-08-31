@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMW M8 Details - CarsCraze</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: #000;
+            color: #fff;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: rgba(0, 0, 0, 0.95);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 3px solid #0066b4;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .main-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #0066b4;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+        
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 30px;
+            padding: 0;
+            margin-bottom: 15px;
+        }
+        
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s ease;
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+        
+        .nav-links a:hover {
+            color: #0066b4;
+            background: rgba(0, 102, 180, 0.1);
+        }
+        
+        .back-btn {
+            background: #0066b4;
+            color: #fff;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+        
+        .back-btn:hover {
+            background: #00549e;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 102, 180, 0.3);
+        }
+        
+        .car-details-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        
+        .car-gallery {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .main-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 15px;
+            border: 3px solid #0066b4;
+        }
+        
+        .thumbnails {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+        
+        .thumbnail {
+            width: 100%;
+            height: 125px;
+            object-fit: cover;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            border: 2px solid #333;
+        }
+        
+        .thumbnail:hover {
+            transform: scale(1.05);
+            border-color: #0066b4;
+        }
+        
+        .car-info-details {
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid #333;
+        }
+        
+        .car-title-large {
+            font-size: 36px;
+            color: #fff;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #0066b4;
+        }
+        
+        .car-price-large {
+            font-size: 42px;
+            color: #0066b4;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 30px;
+            display: block;
+        }
+        
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .spec-card {
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid #333;
+        }
+        
+        .spec-value {
+            font-size: 24px;
+            color: #0066b4;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .spec-label {
+            color: #ccc;
+            font-size: 14px;
+        }
+        
+        .features-section {
+            margin: 40px 0;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .feature-item {
+            background: rgba(0, 102, 180, 0.2);
+            color: #0066b4;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .booking-section {
+            background: #2a2a2a;
+            padding: 40px;
+            border-radius: 15px;
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        .booking-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .form-input {
+            padding: 15px;
+            border: 2px solid #333;
+            border-radius: 8px;
+            background: #1a1a1a;
+            color: #fff;
+            font-size: 16px;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #0066b4;
+        }
+        
+        .book-btn {
+            background: linear-gradient(to right, #0066b4, #004d8c);
+            color: #fff;
+            border: none;
+            padding: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 18px;
+            grid-column: 1 / -1;
+            transition: all 0.3s ease;
+        }
+        
+        .book-btn:hover {
+            background: linear-gradient(to right, #00549e, #003b6f);
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            .car-gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .thumbnails {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .specs-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .car-title-large {
+                font-size: 28px;
+            }
+            
+            .car-price-large {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- الهيدر -->
+    <header class="header">
+        <h1 class="main-title">CARSCRAZE</h1>
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="collection.html">Collection</a></li>
+                <li><a href="bmw.html">BMW</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <button class="back-btn" onclick="window.location.href='bmw.html'">
+            ← Back to BMW
+        </button>
+    </header>
+
+    <div class="car-details-container">
+        <!-- معرض الصور -->
+        <div class="car-gallery">
+            <img src="https://images.unsplash.com/photo-1542362567-b07e54358753?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="BMW M8" class="main-image" id="mainImage">
+            <div class="thumbnails">
+                <img src="https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                     alt="BMW M8 Interior" class="thumbnail" onclick="changeImage(this)">
+                <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                     alt="BMW M8 Engine" class="thumbnail" onclick="changeImage(this)">
+                <img src="https://images.unsplash.com/photo-1563720223880-4aaddb720d9f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                     alt="BMW M8 Back" class="thumbnail" onclick="changeImage(this)">
+            </div>
+        </div>
+
+        <!-- معلومات السيارة -->
+        <div class="car-info-details">
+            <h2 class="car-title-large">BMW M8 Competition 2024</h2>
+            <span class="car-price-large">$130,000</span>
+            
+            <div class="specs-grid">
+                <div class="spec-card">
+                    <div class="spec-value">4.4L V8</div>
+                    <div class="spec-label">المحرك</div>
+                </div>
+                <div class="spec-card">
+                    <div class="spec-value">617 HP</div>
+                    <div class="spec-label">القوة</div>
+                </div>
+                <div class="spec-card">
+                    <div class="spec-value">3.2s</div>
+                    <div class="spec-label">0-100 كم/س</div>
+                </div>
+                <div class="spec-card">
+                    <div class="spec-value">305 km/h</div>
+                    <div class="spec-label">السرعة القصوى</div>
+                </div>
+            </div>
+
+            <!-- المواصفات -->
+            <div class="features-section">
+                <h3 style="color: #0066b4; margin-bottom: 20px; text-align: center;">المواصفات الرئيسية</h3>
+                <div class="features-grid">
+                    <div class="feature-item">ناقل حركة أوتوماتيكي 8 سرعات</div>
+                    <div class="feature-item">نظام الدفع الرباعي xDrive</div>
+                    <div class="feature-item">فرامل كربونية M Sport</div>
+                    <div class="feature-item">مقاعد جلد Merino</div>
+                    <div class="feature-item">شاشة عرض رأسية 12.3"</div>
+                    <div class="feature-item">نظام صوت Bowers & Wilkins</div>
+                    <div class="feature-item">الكاميرا الخلفية 360°</div>
+                    <div class="feature-item">مثبت سرعة ذكي</div>
+                </div>
+            </div>
+
+            <!-- قسم الحجز -->
+            <div class="booking-section">
+                <h3 style="color: #0066b4; margin-bottom: 20px;">احجز تجربة قيادة</h3>
+                <div class="booking-form">
+                    <input type="text" class="form-input" placeholder="الاسم الكامل" required>
+                    <input type="tel" class="form-input" placeholder="رقم الجوال" required>
+                    <input type="email" class="form-input" placeholder="البريد الإلكتروني">
+                    <select class="form-input">
+                        <option>اختر الموديل</option>
+                        <option>BMW M8 Competition</option>
+                        <option>BMW M5 CS</option>
+                        <option>BMW X7 M50i</option>
+                    </select>
+                    <input type="date" class="form-input" placeholder="التاريخ المفضل">
+                    <input type="time" class="form-input" placeholder="الوقت المفضل">
+                    <button class="book-btn" onclick="bookTestDrive()">تأكيد الحجز</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // تغيير الصورة الرئيسية
+        function changeImage(element) {
+            document.getElementById('mainImage').src = element.src;
+        }
+
+        // حجز تجربة قيادة
+        function bookTestDrive() {
+            const name = document.querySelector('input[type="text"]').value;
+            const phone = document.querySelector('input[type="tel"]').value;
+            
+            if(name && phone) {
+                alert(`شكراً ${name}! تم حجز موعد تجربة القيادة بنجاح. سيتصل بك فريقنا على الرقم ${phone} خلال 24 ساعة.`);
+                
+                // مسح الحقول
+                document.querySelectorAll('.form-input').forEach(input => {
+                    if(input.type !== 'button') input.value = '';
+                });
+            } else {
+                alert('الرجاء ملء جميع الحقول المطلوبة');
+            }
+        }
+
+        // تأثيرات الظهور
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // تطبيق تأثيرات على العناصر
+        document.querySelectorAll('.spec-card, .feature-item').forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(30px)';
+            item.style.transition = 'all 0.6s ease';
+            observer.observe(item);
+        });
+    </script>
+</body>
+</html>

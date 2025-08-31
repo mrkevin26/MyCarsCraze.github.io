@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Collection - CarsCraze</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: #000;
+            color: #fff;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid #c89b3c;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .main-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #c89b3c;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+        
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 30px;
+            padding: 0;
+        }
+        
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: #c89b3c;
+        }
+        
+        .back-btn {
+            background: #c89b3c;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: #b88a2d;
+            transform: translateY(-2px);
+        }
+        
+        .collection-hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .collection-hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #c89b3c;
+        }
+        
+        .collection-hero p {
+            font-size: 18px;
+            color: #ccc;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .filters {
+            padding: 30px 20px;
+            background: #111;
+            text-align: center;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            background: transparent;
+            color: #fff;
+            border: 2px solid #c89b3c;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: #c89b3c;
+            color: #000;
+        }
+        
+        .cars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            padding: 50px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .car-card {
+            background: #1a1a1a;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #333;
+        }
+        
+        .car-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(200, 155, 60, 0.3);
+            border-color: #c89b3c;
+        }
+        
+        .car-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 2px solid #c89b3c;
+        }
+        
+        .car-info {
+            padding: 25px;
+        }
+        
+        .car-title {
+            font-size: 24px;
+            color: #fff;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .car-specs {
+            color: #ccc;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #333;
+        }
+        
+        .car-price {
+            font-size: 28px;
+            color: #c89b3c;
+            font-weight: bold;
+            margin: 20px 0;
+            text-align: center;
+            display: block;
+        }
+        
+        .car-btn {
+            background: linear-gradient(to right, #c89b3c, #9b722d);
+            color: #000;
+            border: none;
+            padding: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-size: 16px;
+        }
+        
+        .car-btn:hover {
+            background: linear-gradient(to right, #b88a2d, #8a6728);
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            .cars-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .filter-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .filter-btn {
+                width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- الهيدر -->
+    <header class="header">
+        <h1 class="main-title">CARSCRAZE COLLECTION</h1>
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="#filters">Filters</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <button class="back-btn" onclick="window.location.href='index.html'">
+            ← Back to Home
+        </button>
+    </header>
+
+    <!-- قسم البطل -->
+    <section class="collection-hero">
+        <h1>Premium Luxury Collection</h1>
+        <p>Discover our handpicked selection of the world's finest automobiles</p>
+    </section>
+
+    <!-- الفلاتر -->
+    <section class="filters" id="filters">
+        <h2 style="margin-bottom: 20px; color: #c89b3c;">Filter by Brand</h2>
+        <div class="filter-buttons">
+            <button class="filter-btn active">All</button>
+            <button class="filter-btn" onclick="window.location.href='bmw.html'">BMW</button>
+            <button class="filter-btn" onclick="window.location.href='Mercedes.html'">Mercedes</button>
+            <button class="filter-btn" onclick="window.location.href='Porsche.html'">Porsche</button>
+            <button class="filter-btn" onclick="window.location.href='Audi.html'" >Audi</button>
+            <button class="filter-btn" onclick="window.location.href='Lamborghini.html'">Lamborghini</button>
+            <button class="filter-btn" onclick="window.location.href='Ferrari.html'">Ferrari</button>
+        </div>
+    </section>
+
+    <!-- معرض السيارات -->
+    <div class="cars-grid">
+        <!-- BMW M8 -->
+        <div class="car-card" data-brand="bmw">
+            <img src="https://images.unsplash.com/photo-1542362567-b07e54358753?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="BMW M8" class="car-image">
+            <div class="car-info">
+                <h3 class="car-title">BMW M8 Competition</h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <span>Engine:</span>
+                        <span>4.4L V8 Twin-Turbo</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Power:</span>
+                        <span>617 HP</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>0-100 km/h:</span>
+                        <span>3.2s</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Top Speed:</span>
+                        <span>305 km/h</span>
+                    </div>
+                </div>
+                <span class="car-price">$130,000</span>
+                <button class="car-btn">View Details & Test Drive</button>
+            </div>
+        </div>
+
+        <!-- أضف باقي السيارات بنفس الشكل هنا -->
+        <!-- Mercedes AMG GT -->
+        <div class="car-card" data-brand="mercedes">
+            <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Mercedes AMG GT" class="car-image">
+            <div class="car-info">
+                <h3 class="car-title">Mercedes-AMG GT</h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <span>Engine:</span>
+                        <span>4.0L V8 Biturbo</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Power:</span>
+                        <span>523 HP</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>0-100 km/h:</span>
+                        <span>3.6s</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Top Speed:</span>
+                        <span>318 km/h</span>
+                    </div>
+                </div>
+                <span class="car-price">$115,000</span>
+                <button class="car-btn">View Details & Test Drive</button>
+            </div>
+        </div>
+
+        <!-- Porsche 911 -->
+        <div class="car-card" data-brand="porsche">
+            <img src="https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Porsche 911" class="car-image">
+            <div class="car-info">
+                <h3 class="car-title">Porsche 911 Turbo S</h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <span>Engine:</span>
+                        <span>3.8L Flat-6 Twin-Turbo</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Power:</span>
+                        <span>640 HP</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>0-100 km/h:</span>
+                        <span>2.6s</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Top Speed:</span>
+                        <span>330 km/h</span>
+                    </div>
+                </div>
+                <span class="car-price">$205,000</span>
+                <button class="car-btn">View Details & Test Drive</button>
+            </div>
+        </div>
+
+        <!-- Audi R8 -->
+        <div class="car-card" data-brand="audi">
+            <img src="https://images.unsplash.com/photo-1601268859287-9cec8a74e9f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Audi R8" class="car-image">
+            <div class="car-info">
+                <h3 class="car-title">Audi R8 V10 Plus</h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <span>Engine:</span>
+                        <span>5.2L V10</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Power:</span>
+                        <span>602 HP</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>0-100 km/h:</span>
+                        <span>3.2s</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Top Speed:</span>
+                        <span>330 km/h</span>
+                    </div>
+                </div>
+                <span class="car-price">$189,000</span>
+                <button class="car-btn">View Details & Test Drive</button>
+            </div>
+        </div>
+
+        <!-- Lamborghini Huracan -->
+        <div class="car-card" data-brand="lamborghini">
+            <img src="https://images.unsplash.com/photo-1544829099-9f9a8b4c6c0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Lamborghini Huracan" class="car-image">
+            <div class="car-info">
+                <h3 class="car-title">Lamborghini Huracan</h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <span>Engine:</span>
+                        <span>5.2L V10</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Power:</span>
+                        <span>631 HP</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>0-100 km/h:</span>
+                        <span>2.9s</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Top Speed:</span>
+                        <span>325 km/h</span>
+                    </div>
+                </div>
+                <span class="car-price">$261,000</span>
+                <button class="car-btn">View Details & Test Drive</button>
+            </div>
+        </div>
+
+        <!-- Ferrari 488 -->
+        <div class="car-card" data-brand="ferrari">
+            <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Ferrari 488" class="car-image">
+            <div class="car-info">
+                <h3 class="car-title">Ferrari 488 GTB</h3>
+                <div class="car-specs">
+                    <div class="spec-item">
+                        <span>Engine:</span>
+                        <span>3.9L V8 Twin-Turbo</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Power:</span>
+                        <span>661 HP</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>0-100 km/h:</span>
+                        <span>3.0s</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Top Speed:</span>
+                        <span>330 km/h</span>
+                    </div>
+                </div>
+                <span class="car-price">$275,000</span>
+                <button class="car-btn">View Details & Test Drive</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // فلترة السيارات
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const carCards = document.querySelectorAll('.car-card');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // إزالة النشاط من جميع الأزرار
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // إضافة النشاط للزر المحدد
+                button.classList.add('active');
+                
+                const filter = button.textContent.toLowerCase();
+                
+                // فلترة السيارات
+                carCards.forEach(card => {
+                    if (filter === 'all') {
+                        card.style.display = 'block';
+                    } else {
+                        const brand = card.getAttribute('data-brand');
+                        if (brand === filter) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        });
+
+        // تأثيرات التمرير
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        carCards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(50px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
